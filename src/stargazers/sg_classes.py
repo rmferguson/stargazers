@@ -56,6 +56,8 @@ class ToJsonMixin(object):
 class JsonIOMixin(FromJsonMixin, ToJsonMixin):
     """
     Literally just `FromJsonMixin` and `ToJsonMixin`, together, for convenience.
+
+    Note that you must still override the "_serialized_fields" static method,
     """
 
     @staticmethod
