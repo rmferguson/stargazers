@@ -30,6 +30,13 @@ __all__ = [
 
 
 def current_thread_is_main():
+    """
+    Returns if the current thread appears to be the main thread.
+
+    That is, returns if the threading.current_thread()
+    method returns the same object as the threading.main_thread() method,
+    which is checked by `is` to check for identity.
+    """
     # return (id(threading.current_thread()) == id(threading.main_thread()))
     return threading.current_thread() is threading.main_thread()
 
@@ -54,6 +61,13 @@ def dump_to_dict(obj: object, fields: typing.Sequence) -> typing.Dict[str, typin
 
 
 dilter = functools.partial(filter, None)
+"""
+Default fILTER
+
+Works as `filter(None, iter)`.
+
+That's it.
+"""
 
 
 # Batched was introduced in Python 3.12,
