@@ -14,5 +14,3 @@ dist/
 .venv
 .venv/
 .env
-
-sg_ml/

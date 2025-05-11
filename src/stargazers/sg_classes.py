@@ -188,8 +188,8 @@ class KeyboardInterruptManager(AbstractContextManager):
         self._prev_handler = None
         super().__init__()
 
-    def signal_handler(self, signal, frame):
-        self.signal_received = (signal, frame)
+    def signal_handler(self, received_sig, frame):
+        self.signal_received = (received_sig, frame)
 
     def __enter__(self):
         self.signal_received = None

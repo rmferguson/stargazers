@@ -4,9 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-stargazers = {file = ".", editable = true}
 "pyproject.toml" = "*"
+pytest = "*"
+hypothesis = "*"
 black = "*"
+isort = "*"
+pylint = "*"
+autoflake = "*"
 
 [dev-packages]
 
