@@ -58,6 +58,10 @@ class JsonIOMixin(FromJsonMixin, ToJsonMixin):
     Literally just `FromJsonMixin` and `ToJsonMixin`, together, for convenience.
     """
 
+    @staticmethod
+    def _serialized_fields():
+        raise NotImplementedError
+
 
 class _BaseCounterMixin(abc.ABC):
     @property
