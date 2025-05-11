@@ -14,3 +14,4 @@ dist/
 .venv
 .venv/
 .env
+.pytest_cache
