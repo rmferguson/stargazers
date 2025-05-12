@@ -3,6 +3,8 @@ Utility functions without better homes.
 
 Contains iterators, object utility functions, and testing utilities.
 
+Most of these deserve better homes.
+
 ### Relevant documentation:
 - [CMDline options](https://docs.python.org/3/using/cmdline.html#environment-variables)
 - [Developer Mode](https://docs.python.org/3/library/devmode.html#devmode)
@@ -22,6 +24,7 @@ __all__ = [
     "current_thread_is_main",
     "dump_to_dict",
     "dilter",
+    "first",
     "batched",
     "flatten",
     "windowed",
@@ -68,6 +71,30 @@ Works as `filter(None, iter)`.
 
 That's it.
 """
+
+_sentinel = object()
+
+
+def first(iterable, default=_sentinel):
+    """
+    Return the first index of an iterable that supports indexing.
+    If indexing is supported, but the iterable is empty, returns the default.
+    If the default is not specified, raises the index error.
+    e.g.:
+    ```
+    lst = [1,2,3,4]
+    first(lst, None) # 1
+    first([], None) # None
+    first([]) # Raises
+    ```
+    """
+    try:
+        return iterable[0]
+    except IndexError:
+        if default is _sentinel:
+            raise
+    else:
+        return default
 
 
 # Batched was introduced in Python 3.12,
@@ -216,7 +243,8 @@ def _run_tests():
     str_count = len(list(filter(lambda x: isinstance(x, str), better_data)))
     assert str_count == 2
 
-    invariant(2 + 2 == 4)
+    # pylint doesn't handle the single dispatch correctly.
+    invariant(2 + 2 == 4)  # pylint: disable=E1120
     invariant(object, lambda x: x is not None)
     try:
         invariant(None, lambda x: x is not None)
