@@ -81,9 +81,7 @@ def get_logger_for(
         # Yes, the sgtimer class has this
         # but there's no other reason to import the class,
         # So I want to avoid the import to prevent any circular nonsense.
-        logfile_handler = logging.FileHandler(
-            f"{py_file_name}.{str(int(time.time()))}.log"
-        )
+        logfile_handler = logging.FileHandler(f"{py_file_name}.{int(time.time())}.log")
         logfile_handler.setLevel(level=logging_level)
         logfile_handler.setFormatter(formatter)
 

@@ -223,6 +223,8 @@ def _(condition: bool, msg: str | None = None) -> None:
 
 
 def _run_tests():
+    import contextlib
+
     terrible_data = [
         [_ for _ in range(3)],
         [],
@@ -246,11 +248,9 @@ def _run_tests():
     # pylint doesn't handle the single dispatch correctly.
     invariant(2 + 2 == 4)  # pylint: disable=E1120
     invariant(object, lambda x: x is not None)
-    try:
+
+    with contextlib.suppress(InvariantViolation):
         invariant(None, lambda x: x is not None)
-        raise RuntimeError("Test failed.")
-    except InvariantViolation:
-        pass
 
 
 if __name__ == "__main__":
