@@ -116,7 +116,6 @@ def get_succinct_logger_for(py_file_name):
         py_file_name,
         log_format=_default_prod_format,
         date_format=_default_dt_format,
-        propogate=False,
         debug_config=False,
     )
 

@@ -252,6 +252,8 @@ def _run_tests():
     with contextlib.suppress(InvariantViolation):
         invariant(None, lambda x: x is not None)
 
+    print("All tests passed")
+
 
 if __name__ == "__main__":
     import sys

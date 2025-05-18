@@ -1,7 +1,6 @@
 import os
 import typing
 from json import dumps, load
-from zipfile import ZipFile
 from zlib import crc32
 
 from .sg_classes import AbstractContextManager
@@ -104,25 +103,11 @@ def get_path_basename_hex(file_path: str, _mod: int = DEFAULT_HASH_MOD) -> str:
     return get_str_hex(os.path.basename(file_path), _mod)
 
 
-def squish_json(json_data: typing.Union[typing.Dict, typing.List]) -> str:
+def squish_json(json_data: dict | list) -> str:
     """
     Formats JSON data to the tightest possible representation in str form.
     """
-    return dumps(json_data, indent=None, separators=(",", ":"))
-
-
-# TODO(@Robert): write a file after compressing the data.
-# Probably convert the data to bytes and compress that?
-
-
-# TODO(@Robert): Doesn't seem to quite work right?
-def zip_directory(target_directory: str):
-    with ZipFile(f"{target_directory}.zip", mode="w") as data_backup:
-        for _, subdirectory, files in os.walk(target_directory):
-            for sub in subdirectory:
-                for file in files:
-                    original = os.path.join(target_directory, sub, file)
-                    data_backup.write(filename=original, arcname=file)
+    return dumps(json_data, separators=(",", ":"))
 
 
 class JSONFileUpdateHandler(AbstractContextManager):
