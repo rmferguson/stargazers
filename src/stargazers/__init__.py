@@ -63,7 +63,7 @@ def dump_to_dict(obj: object, fields: typing.Sequence) -> typing.Dict[str, typin
     return dict(zip(fields, f(obj)))
 
 
-dilter = functools.partial(filter, None)
+dilter: typing.Callable = functools.partial(filter, None)
 """
 Default fILTER
 

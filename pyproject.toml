@@ -20,6 +20,7 @@ slotscheck = "^0.19.1"
 pylint = "^3.3.7"
 hypothesis = {extras = ["cli"], version = "^6.131.18"}
 refurb = "^2.1.0"
+mypy = "^1.15.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

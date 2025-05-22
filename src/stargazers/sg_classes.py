@@ -1,11 +1,10 @@
 import abc
 import signal
+from contextlib import AbstractContextManager
 from operator import attrgetter
 from typing import Any
 
 __all__ = [
-    "AbstractContextManager",
-    "AbstractAsyncContextManager",
     "FromJsonMixin",
     "ToJsonMixin",
     "JsonIOMixin",
@@ -94,90 +93,6 @@ class HexCounterMixin(_BaseCounterMixin):
         return a % 0xFFFF
 
 
-try:
-    from contextlib import AbstractAsyncContextManager, AbstractContextManager
-except ImportError:
-
-    class AbstractContextManager(abc.ABC):
-        """
-        Abstract Base Class that serves a few purposes.
-        - Child classes are clearly marked as ContextManagers
-        - ContextManagers in development must have the magic methods
-            implemented before a class can be instantiated. (Hopefully this prevents at least one bug.)
-        - It avoids the janky syntax of the built-in decorator.
-        """
-
-        @abc.abstractmethod
-        def __enter__(self):
-            """
-            1st mandatory method for Context Managers.
-
-            Will almost certainly look something like:
-            ```python
-            def __enter__(self):
-                # ... Whatever other code
-                # open a connection, start a timer, what-have-you.
-                return self
-            ```
-            """
-            raise NotImplementedError
-
-        @abc.abstractmethod
-        def __exit__(self, typ, val, tb):
-            """
-            2nd mandatory method for Context Managers.
-
-            Way more flexible - Doesn't need to return self or anything specific.
-            ```python
-            def __exit__(self, typ, val, tb):
-                # ... Some closing code.
-                # typ - Exception type, if applicable
-                # val - Exception value, if applicable
-                # tb  - Traceback, if applicable
-            ```
-            """
-            raise NotImplementedError
-
-    class AbstractAsyncContextManager(abc.ABC):
-        """
-        Abstract Base Class that serves a few purposes.
-        - Child classes are clearly marked as AsyncContextManagers
-        - AsyncContextManagers in development must have the magic methods
-            implemented before a class can be instantiated. (Hopefully this prevents at least one bug.)
-        """
-
-        @abc.abstractmethod
-        async def __aenter__(self):
-            """
-            1st mandatory method for Async Context Managers.
-
-            Will almost certainly look something like:
-            ```python
-            async def __aenter__(self):
-                # ... Whatever other code
-                # open a connection, start a timer, what-have-you.
-                return self
-            ```
-            """
-            raise NotImplementedError
-
-        @abc.abstractmethod
-        async def __aexit__(self, typ, val, tb):
-            """
-            2nd mandatory method for Async Context Managers.
-
-            Way more flexible - Doesn't need to return self or anything specific.
-            ```python
-            async def __aexit__(self, typ, val, tb):
-                # ... Some closing code.
-                # typ - Exception type, if applicable
-                # val - Exception value, if applicable
-                # tb  - Traceback, if applicable
-            ```
-            """
-            raise NotImplementedError
-
-
 class KeyboardInterruptManager(AbstractContextManager):
     """
     Used in the main thread to receive a KeyboardInterrupt, but do nothing until the context ends.
@@ -206,4 +121,4 @@ class KeyboardInterruptManager(AbstractContextManager):
     def __exit__(self, typ, val, tb):
         signal.signal(signal.SIGINT, self._prev_handler)
         if self.signal_received:
-            self._prev_handler(*self.signal_received)
+            self._prev_handler(*self.signal_received)  # type: ignore

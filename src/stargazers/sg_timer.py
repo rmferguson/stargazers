@@ -94,9 +94,9 @@ class Timer(AbstractContextManager):
     """
 
     def __init__(self, *, start_now: bool = False):
-        self.start_time = None
-        self.stop_time = None
-        self.time_stamps = []
+        self.start_time: datetime | None = None
+        self.stop_time: datetime | None = None
+        self.time_stamps: list[datetime] = []
 
         if start_now:
             self.start_time = self.utcnow()
@@ -147,6 +147,9 @@ class Timer(AbstractContextManager):
 
     @property
     def duration_as_delta(self) -> timedelta:
+        if self.start_time is None:
+            raise RuntimeError(".duration_as_delta accessed without a start time.")
+
         return (
             self.stop_time - self.start_time
             if self.stop_time
@@ -229,6 +232,8 @@ if __name__ == "__main__":
             t.lap()
         t.stop()
 
+        assert t.start_time
+        assert t.stop_time
         print(f"{t.start_time}:{t.stop_time} ({t.stop_time - t.start_time})")
         for c, lap in enumerate(t.get_laps()):
             lap_start, lap_end = lap
