@@ -45,7 +45,7 @@ class JSONIndentConsts(object):
     STANDARD = 2 if __debug__ else None
     SPARSE = 4
     LOOSE = 2
-    TIGHT = None
+    TIGHT: None = None
 
 
 DEFAULT_HASH_MOD = (16**6) - 1
