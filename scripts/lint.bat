@@ -13,4 +13,5 @@ FOR %%G IN (tests, src) DO (
 echo Running pylint...
 pylint -- .
 mypy --strict-bytes --pretty -- src
+pytest 
 echo Finished

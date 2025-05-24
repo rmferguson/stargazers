@@ -4,14 +4,15 @@ import hypothesis.strategies as st
 from stargazers import first, last
 
 
-# Defaults are just to make sure that an empty list doesn't fuck us.
 @hypothesis.given(st.lists(st.integers()))
 def test_first(lst):
+    hypothesis.assume(len(lst) > 0)
     lst.sort()
-    assert min(lst, default=1) == first(lst, default=1)
+    assert min(lst) == first(lst)
 
 
 @hypothesis.given(st.lists(st.integers()))
 def test_last(lst):
+    hypothesis.assume(len(lst) > 0)
     lst.sort()
-    assert max(lst, default=1) == last(lst, default=1)
+    assert max(lst) == last(lst)
