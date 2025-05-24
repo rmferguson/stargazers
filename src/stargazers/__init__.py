@@ -93,8 +93,30 @@ def first(iterable, default=_sentinel):
     except IndexError:
         if default is _sentinel:
             raise
-    else:
-        return default
+
+    return default
+
+
+def last(iterable, default=_sentinel):
+    """
+    Return the last index of an iterable that supports indexing.
+    If indexing is supported, but the iterable is empty, returns the default.
+    If the default is not specified, raises the index error.
+    e.g.:
+    ```
+    lst = [1,2,3,4]
+    last(lst, None) # 4
+    last([], None) # None
+    last([]) # Raises
+    ```
+    """
+    try:
+        return iterable[-1]
+    except IndexError:
+        if default is _sentinel:
+            raise
+
+    return default
 
 
 # Batched was introduced in Python 3.12,
