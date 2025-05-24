@@ -25,6 +25,7 @@ __all__ = [
     "dump_to_dict",
     "dilter",
     "first",
+    "last",
     "batched",
     "flatten",
     "windowed",

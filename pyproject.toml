@@ -1,6 +1,6 @@
 [project]
 name = "stargazers"
-version = "1.2.0"
+version = "1.2.1"
 description = "Tools to help people shoot for the stars"
 authors = [
     {name = "Robert Ferguson",email = "rmferguson@protonmail.com"}
