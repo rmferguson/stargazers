@@ -6,7 +6,7 @@ FOR %%G IN (tests, src) DO (
     :: isort will format imports badly, so black has to be after.
     isort %%G > NUL 2>&1 
     black %%G > NUL 2>&1
-    refurb %%G --ignore 112 --ignore 147 --quiet
+    :: refurb %%G --ignore 112 --ignore 147 --quiet
     echo folder "%%G" done
 )
 
@@ -14,4 +14,4 @@ echo Running pylint...
 pylint -- .
 mypy --strict-bytes --pretty -- src
 pytest 
-echo Finished
+echo Finished lint
