@@ -28,4 +28,8 @@ Install the project (and it's dependencies):
 - [Async Context Managers and Iterators](https://bbc.github.io/cloudfit-public-docs/asyncio/asyncio-part-3.html)
 
 ## Libraries
+A partial list of libraries I need to look into.
 - [cookiecutter](https://github.com/cookiecutter/cookiecutter)
+- [DearPyGui](https://github.com/hoffstadt/DearPyGui)
+- [PyAutoGUI](https://github.com/asweigart/pyautogui)
+- [nicewin](https://github.com/asweigart/nicewin)
