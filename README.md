@@ -30,6 +30,9 @@ Install the project (and it's dependencies):
 poetry install
 ```
 
+# On the code
+
+TODO
 
 # References
 

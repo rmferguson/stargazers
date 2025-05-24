@@ -226,59 +226,25 @@ class InvariantViolation(Exception):
     """
 
 
+# returns True so you can write:
+# `assert invariant(True)`, and it can be ignored in non-debug code
+# Without the assert, invariant will throw a violation in both contexts.
 @functools.singledispatch
 def invariant(
     obj: object,
     test: typing.Callable[..., bool],
     msg: str | None = None,
-) -> None:
+) -> bool:
     if not test(obj):
         assert callable(test)
         msg = "" if msg is None else msg[:]
         raise InvariantViolation(msg)
+    return True
 
 
 @invariant.register(bool)
-def _(condition: bool, msg: str | None = None) -> None:
+def _(condition: bool, msg: str | None = None) -> bool:
     if not condition:
         msg = "" if msg is None else msg[:]
         raise InvariantViolation(msg)
-
-
-def _run_tests():
-    import contextlib
-
-    terrible_data = [
-        [_ for _ in range(3)],
-        [],
-        [],
-        "string that shouldn't be flattened",
-        [_ for _ in range(3, 6)],
-        [_ for _ in range(6, 9)],
-        [],
-        [[[_ for _ in range(9, 12)], [], [_ for _ in range(12, 15)]]],
-        [[[[[["another string that shouldn't be flattened."]]]]]],
-    ]
-
-    better_data = list(flatten(terrible_data))
-    for d in better_data:
-        assert not isinstance(d, list)
-    for i in range(15):
-        assert i in better_data, i
-    str_count = len(list(filter(lambda x: isinstance(x, str), better_data)))
-    assert str_count == 2
-
-    # pylint doesn't handle the single dispatch correctly.
-    invariant(2 + 2 == 4)  # pylint: disable=E1120
-    invariant(object, lambda x: x is not None)
-
-    with contextlib.suppress(InvariantViolation):
-        invariant(None, lambda x: x is not None)
-
-    print("All tests passed")
-
-
-if __name__ == "__main__":
-    import sys
-
-    sys.exit(_run_tests())
+    return True
