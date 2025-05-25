@@ -96,7 +96,7 @@ def write_utf8_json_data(
 
 
 def get_str_hex(str_var: str, _mod: int = DEFAULT_HASH_MOD) -> str:
-    return f"{crc32(str_var.encode(UTF_8_ENCODING)) % _mod:6}"
+    return f"{hex(crc32(str_var.encode(UTF_8_ENCODING)) % _mod)}"
 
 
 def get_path_basename_hex(file_path: str, _mod: int = DEFAULT_HASH_MOD) -> str:
