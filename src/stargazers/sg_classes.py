@@ -1,6 +1,7 @@
 import abc
 import signal
 from contextlib import AbstractContextManager
+from json import loads
 from operator import attrgetter
 from typing import Any
 
@@ -29,7 +30,6 @@ class FromJsonMixin(object):
 
     @classmethod
     def from_json_mapping(cls, data: str):
-        from json import loads
 
         return cls(**loads(data))
 
@@ -97,11 +97,11 @@ class KeyboardInterruptManager(AbstractContextManager):
     """
     Used in the main thread to receive a KeyboardInterrupt, but do nothing until the context ends.
 
+    Note that if you're using this, you should probably be running the script through Click instead, or this should be in the __main__ handler.
+
     Due to how signals in python work, this can only be used in the main thread.
 
-    Can (and should) be subclassed to give the `signal_handler` and `__exit__` method(s) any additional functionality to clean up resources.
-
-    Note that if you're using this, you should probably be running the script through Click, or this should be in the __main__ handler.
+    Can (and should) be subclassed to give the `__exit__` method(s) any additional functionality to clean up resources.
     """
 
     def __init__(self):

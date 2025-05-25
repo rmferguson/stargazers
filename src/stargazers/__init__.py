@@ -156,8 +156,8 @@ def flatten(iterable):
 
     This version *removes*, and *does not* support:
     - the usage of a deque. The import and usage seemed unnecessary, since the original always pops and appends to the left.
-    - the ability to specifiy types that shouldn't be flattened. The only types that avoid being flattened are `str` and `bytes`.
-    - the notion of flattening to a specific level of flatness. Just flatten all the way down. Don't be weird.
+    - the ability to specifiy types that shouldn't be flattened. The only types that avoid being flattened are `str` and `bytes`, and this is explicitly because those types being flattened is actively harmful in almost all cases.
+    - the notion of flattening to a specific level of flatness. Don't be weird; just flatten all the way down.
     """
     from itertools import repeat
 

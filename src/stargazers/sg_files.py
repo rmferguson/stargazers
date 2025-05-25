@@ -85,7 +85,7 @@ def read_utf8_json_data(file_path: str):
 def write_utf8_json_data(
     file_path: str,
     json_data: typing.Any,  # Fuck it, you know what JSON data looks like.
-    indent: typing.Union[int, None] = JSONIndentConsts.LOOSE,
+    indent: int | None = JSONIndentConsts.LOOSE,
     sort_keys=False,
 ):
     """
