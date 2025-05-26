@@ -1,11 +1,15 @@
 import os
 import typing
-from json import dumps, load
+from json import dump, dumps, load, loads
 from zlib import crc32
 
-from .sg_classes import AbstractContextManager
+from .context import AbstractContextManager
 
 __all__ = [
+    "dump",
+    "load",
+    "dumps",
+    "loads",
     "UTF_8_ENCODING",
     "OPEN_MODE",
     "OPEN_MODE_BINARY",

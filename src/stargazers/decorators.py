@@ -7,7 +7,6 @@ __all__ = [
 ]
 
 
-# Decorators
 def exponential_retry(caught_exceptions=None, max_tries=3, base_delay=2):
 
     if caught_exceptions is None:

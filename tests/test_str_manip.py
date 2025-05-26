@@ -1,7 +1,7 @@
 import hypothesis
 import hypothesis.strategies as st
 
-from stargazers.sg_files import get_str_hex
+from stargazers.files import get_str_hex
 
 
 @hypothesis.given(st.text())

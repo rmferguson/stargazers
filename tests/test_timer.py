@@ -2,7 +2,7 @@ from time import sleep
 
 import pytest
 
-from stargazers.sg_timer import Timer, TimerError
+from stargazers.timer import Timer, TimerError
 
 TIMER_STATIC_DURATION = 0.5
 

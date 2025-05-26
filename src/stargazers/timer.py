@@ -17,7 +17,7 @@ Timer also contains some utility methods for timestamps.
 import time
 from datetime import datetime, timedelta, timezone
 
-from .sg_classes import AbstractContextManager
+from .context import AbstractContextManager
 
 __all__ = [
     "Timer",
@@ -133,14 +133,10 @@ class Timer(AbstractContextManager):
 
             # Errors for a timer that was inappropriately stopped.
             if self.start_time is None:
-                raise TimerError(
-                    "Timer.stop() called on Timer instance that was not started"
-                )
+                raise TimerError("Timer.stop() called on Timer instance that was not started")
 
             if old is not None:
-                raise TimerError(
-                    "Timer.stop() called on Timer instance that was already stopped"
-                )
+                raise TimerError("Timer.stop() called on Timer instance that was already stopped")
 
         self.stop_time = self.utcnow()
         self.time_stamps.append(self.stop_time)
@@ -151,9 +147,7 @@ class Timer(AbstractContextManager):
             raise RuntimeError(".duration_as_delta accessed without a start time.")
 
         return (
-            self.stop_time - self.start_time
-            if self.stop_time
-            else self.utcnow() - self.start_time
+            self.stop_time - self.start_time if self.stop_time else self.utcnow() - self.start_time
         )
 
     @property

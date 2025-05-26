@@ -25,9 +25,7 @@ __all__ = [
 ]
 
 # https://docs.python.org/3.11/library/logging.html#logrecord-attributes
-_default_debug_format = (
-    "{name}.{thread:d}.{funcName}.{lineno}.{levelname}-{asctime}:\n\t{message}"
-)
+_default_debug_format = "{name}.{thread:d}.{funcName}.{lineno}.{levelname}-{asctime}:\n\t{message}"
 _default_prod_format = "{levelname}-{asctime}:\t{message}"
 _default_dt_format = "%Y/%m/%d@%H:%M:%S"
 

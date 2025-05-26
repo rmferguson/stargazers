@@ -1,6 +1,6 @@
 [project]
 name = "stargazers"
-version = "1.2.2"
+version = "2.0.0"
 description = "Tools to help people shoot for the stars"
 authors = [
     {name = "Robert Ferguson",email = "rmferguson@protonmail.com"}
@@ -26,11 +26,11 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 88
+line-length = 100
 
 [tool.isort]
 atomic = true
-line_length = 88
+line_length = 100
 skip_gitignore = true
 known_first_party = ["pulsar", "stargazers"]
 
@@ -96,7 +96,7 @@ ignore-long-lines = "^\\s*(# )?<?https?://\\S+>?$"
 indent-after-paren = 4
 indent-string = "    "
 
-max-line-length = 88
+max-line-length = 100
 max-module-lines = 10000
 
 [tool.pylint.imports]

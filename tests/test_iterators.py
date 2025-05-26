@@ -3,7 +3,7 @@ import math
 import hypothesis
 import hypothesis.strategies as st
 
-from stargazers import first, flatten, last
+from stargazers.iter import first, flatten, last
 
 
 @hypothesis.given(st.lists(st.integers()))
