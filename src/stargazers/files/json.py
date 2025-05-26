@@ -1,45 +1,22 @@
-import os
 import typing
 from json import dump, dumps, load, loads
-from zlib import crc32
 
-from .context import AbstractContextManager
+from ..context import AbstractContextManager
+from . import OPEN_MODE, UTF_8_ENCODING, write_utf8_data
 
 __all__ = [
     "dump",
-    "load",
     "dumps",
+    "load",
     "loads",
-    "UTF_8_ENCODING",
-    "OPEN_MODE",
-    "OPEN_MODE_BINARY",
-    "READ_MODE",
-    "READ_MODE_BINARY",
-    "WRITE_MODE",
-    "WRITE_MODE_BINARY",
     "JSON_EXT",
     "DOT_JSON",
-    "DEFAULT_HASH_MOD",
     "JSONIndentConsts",
     "JSONFileUpdateHandler",
-    "to_utf8_bytes",
-    "read_utf8_data",
-    "write_utf8_data",
     "read_utf8_json_data",
     "write_utf8_json_data",
-    "get_str_hex",
-    "get_path_basename_hex",
     "squish_json",
 ]
-
-
-UTF_8_ENCODING = "utf-8"
-
-OPEN_MODE = "r"
-OPEN_MODE_BINARY = "rb"
-READ_MODE, READ_MODE_BINARY = OPEN_MODE, OPEN_MODE_BINARY
-WRITE_MODE = "w"
-WRITE_MODE_BINARY = "wb"
 
 JSON_EXT = "json"  # Prefer this one.
 DOT_JSON = ".json"
@@ -50,32 +27,6 @@ class JSONIndentConsts(object):
     SPARSE = 4
     LOOSE = 2
     TIGHT: None = None
-
-
-DEFAULT_HASH_MOD = (16**6) - 1
-
-
-def to_utf8_bytes(to_encode: str):
-    return bytes(
-        to_encode,
-        UTF_8_ENCODING,
-    )
-
-
-def read_utf8_data(file_path: str):
-    """
-    Opens a byte-encoded file, decodes it to UTF-8 and returns the contents as a string.
-    """
-    with open(file_path, mode=OPEN_MODE_BINARY) as f:
-        return f.read().decode(UTF_8_ENCODING)
-
-
-def write_utf8_data(file_path: str, data: str):
-    """
-    Writes a string to a file after encoding it to bytes.
-    """
-    with open(file_path, WRITE_MODE_BINARY) as f:
-        f.write(data.encode(UTF_8_ENCODING))
 
 
 def read_utf8_json_data(file_path: str):
@@ -97,14 +48,6 @@ def write_utf8_json_data(
     """
     data = dumps(json_data, indent=indent, sort_keys=sort_keys, ensure_ascii=False)
     write_utf8_data(file_path, data)
-
-
-def get_str_hex(str_var: str, _mod: int = DEFAULT_HASH_MOD) -> str:
-    return f"{hex(crc32(str_var.encode(UTF_8_ENCODING)) % _mod)}"
-
-
-def get_path_basename_hex(file_path: str, _mod: int = DEFAULT_HASH_MOD) -> str:
-    return get_str_hex(os.path.basename(file_path), _mod)
 
 
 def squish_json(json_data: dict | list) -> str:
