@@ -1,5 +1,7 @@
 import functools
 import typing
+from collections import deque
+from itertools import islice, repeat
 
 __all__ = [
     "dilter",
@@ -93,7 +95,7 @@ def flatten(iterable):
     """
     Based on [moreitertools.collapse](https://more-itertools.readthedocs.io/en/stable/_modules/more_itertools/more.html#collapse)
 
-    Flattens nested iterables to a single iterable
+    Flattens nested iterables to a single iterable. Sometimes called `hard_flatten`.
 
         >>> list(flatten([[1,2,3], [4,5,6]]))
         [1,2,3,4,5,6]
@@ -105,7 +107,6 @@ def flatten(iterable):
     - the ability to specifiy types that shouldn't be flattened. The only types that avoid being flattened are `str` and `bytes`, and this is explicitly because those types being flattened is actively harmful in almost all cases.
     - the notion of flattening to a specific level of flatness. Don't be weird; just flatten all the way down.
     """
-    from itertools import repeat
 
     stack = []
     # Add our first node group, treat the iterable as a single node
@@ -117,7 +118,7 @@ def flatten(iterable):
         nodes = node_group
 
         for node in nodes:
-            if isinstance(node, (str, bytes)):
+            if isinstance(node, (str, bytes, bytearray)):
                 yield node
             else:
                 try:
@@ -151,10 +152,6 @@ def windowed(seq, n):
     DEFG
     ```
     """
-    # Contrasting to flatten, this needs to be a deque for the maxlen property
-    # that lists don't offer oob
-    from collections import deque
-    from itertools import islice
 
     iterator = iter(seq)
     window = deque(islice(iterator, n - 1), maxlen=n)
