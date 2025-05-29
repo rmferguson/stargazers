@@ -58,9 +58,10 @@ TODO
 - [Vinta - Awesome Python](https://github.com/vinta/awesome-python)
 - - [Awesome Python Typing](https://github.com/typeddjango/awesome-python-typing)
 
-## Cool Stuff
-- [Curio](https://github.com/dabeaz/curio)
-- [Threado](https://github.com/dabeaz/thredo)
+## My "Awesome" Curations
+- [Curio - Async from the ground up](https://github.com/dabeaz/curio)
+- [Threado - Threads and Async, together at last...?](https://github.com/dabeaz/thredo)
+- [Whenever - Datetime for the modern man](https://github.com/ariebovenberg/whenever)
 
 ## To Read Libraries
 A partial list of libraries and repos to look into.

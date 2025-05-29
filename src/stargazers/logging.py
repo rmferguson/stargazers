@@ -5,13 +5,18 @@ Logging shortcuts.
 logger = get_logger_for(__file__)
 logger.info("Just works!")
 ```
+
+Inspired in part by [a guy on StackOverflow](https://stackoverflow.com/questions/7016056/python-logging-not-outputting-anything/56144390#56144390) who claimed
+> # Your script/app needs to call this somewhere at least once.
+> logging.basicConfig()
+
+No. No you don't.
 """
 
 # Dev note:
-# Because basically everything else in the rest of this code
-# Can/Does import this file
-# We need to avoid importing the other ones as much as possible here.
-# It's a basic logging utility, don't make it more complicated.
+# Because basically everything else in the rest of this package
+# Can (Does) import this file
+# So don't import from the rest of the module here to avoid import loops
 
 import logging
 import os
@@ -20,7 +25,7 @@ import time
 
 __all__ = [
     "get_logger_for",
-    "get_succinct_logger_for",
+    "get_short_logger_for",
     "get_debug_logger_for",
 ]
 
@@ -30,9 +35,6 @@ _default_prod_format = "{levelname}-{asctime}:\t{message}"
 _default_dt_format = "%Y/%m/%d@%H:%M:%S"
 
 
-# TODO(@Robert): Flag for file logging.
-# Allow a basename for file logging that gets rotated on passed size and
-# appends the current timestamp to the basename whenever it creates a new file.
 def get_logger_for(
     py_file_name,
     /,
@@ -40,11 +42,12 @@ def get_logger_for(
     *,
     date_format=None,
     log_to_file=False,
+    log_to_stdout=False,
     propogate=False,
     debug_config=__debug__,
 ):
     """
-    Standardized logger. (I got tired of having to format that shit in every file.)
+    Standardized logger. (I got tired of having to format that thing in every file.)
 
     Generally used like:
     ```python
@@ -76,29 +79,33 @@ def get_logger_for(
     stdout_stream_handler.setFormatter(formatter)
 
     if log_to_file:
-        # Yes, the sgtimer class has this
+        # Yes, the sgtimer class has this exact functionality
         # but there's no other reason to import the class,
         # So I want to avoid the import to prevent any circular nonsense.
         logfile_handler = logging.FileHandler(f"{py_file_name}.{int(time.time())}.log")
         logfile_handler.setLevel(level=logging_level)
         logfile_handler.setFormatter(formatter)
 
-    # TODO(@Robert): What do with this?
     # https://docs.python.org/3/library/sys.html?highlight=sys%20stderr#sys.stderr
-    # stderr_stream_handler = logging.StreamHandler(sys.stderr)
-    # stderr_stream_handler.setLevel(level=logging.DEBUG if debug_config else logging.INFO)
-    # stderr_stream_handler.setFormatter(formatter)
+    if log_to_stdout:
+        stderr_stream_handler = logging.StreamHandler(sys.stderr)
+        stderr_stream_handler.setLevel(level=logging_level)
+        stderr_stream_handler.setFormatter(formatter)
 
     logger = logging.getLogger(os.path.basename(py_file_name))
     logger.addHandler(stdout_stream_handler)
-    # logger.addHandler(stderr_stream_handler)
+    if log_to_file:
+        logger.addHandler(logfile_handler)
+    if log_to_stdout:
+        logger.addHandler(stderr_stream_handler)
+
     logger.setLevel(level=logging_level)
     logger.propagate = propogate
 
     return logger
 
 
-def get_succinct_logger_for(py_file_name):
+def get_short_logger_for(py_file_name):
     """
     Standardized logger that always formats for prod.
 
@@ -107,6 +114,7 @@ def get_succinct_logger_for(py_file_name):
     logger = get_succinct_logger_for(__file__)
     logger.info("Just works!")
     ```
+
     That's it.
     """
 
@@ -127,6 +135,7 @@ def get_debug_logger_for(py_file_name):
     logger = get_debug_logger_for(__file__)
     logger.info("Just works!")
     ```
+
     That's it.
     """
     return get_logger_for(
