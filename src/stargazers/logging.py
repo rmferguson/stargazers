@@ -13,11 +13,6 @@ Inspired in part by [a guy on StackOverflow](https://stackoverflow.com/questions
 No. No you don't.
 """
 
-# Dev note:
-# Because basically everything else in the rest of this package
-# Can (Does) import this file
-# So don't import from the rest of the module here to avoid import loops
-
 import logging
 import os
 import sys

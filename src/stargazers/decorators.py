@@ -8,6 +8,12 @@ __all__ = [
 
 
 def exponential_retry(caught_exceptions=None, max_tries=3, base_delay=2):
+    """
+    An exponential retry function, intended to consume API ~~or scrape pages~~ where you don't necessarily know the rate limit ahead of time,
+    but can be adapted for less surriptitious code as well.
+
+    Uses a slight jitter on the delay for... reasons.
+    """
 
     if caught_exceptions is None:
         caught_exceptions = (Exception,)

@@ -1,38 +1,12 @@
-# Installation
-You can install a project from another directory locally by aiming at it's wheel
-```
-(.venv) <PROJECT>>pip install ..\stargazers\dist\stargazers-x-py3-none-any.whl
-```
+# What the function is this?
 
-or if you're using poetry, it knows how to find a wheel within a project.
-```
-poetry add ..\stargazers
-```
+Stargazers is a module of stuff that I frequently find myself repackaging and using for the same personal projects. Now instead of writing the code again, I just put it in Stargazers.
 
-# Working with Poetry
-Installing a new dependency:
-```
-poetry add x
-```
+Eventually I decided I conceded to the vague notion of "doing this right", repackaged it all as a poetry project, annotated almost every single bit of code, and decided to open source it.
 
-Installing a new development dependency:
-```
-poetry add x -D
-```
+I attempted to most of the swearing and some of the snark during this refactor. I will not remove all of it.
 
-Building the project for external usage:
-```
-poetry build --clean
-```
-
-Install the project (and it's dependencies):
-```
-poetry install
-```
-
-# On the code
-
-TODO
+There are some mildly interesting batch scripts in... `\scripts` as well that I use during hobbyist development.
 
 # References
 
@@ -40,35 +14,27 @@ TODO
 - [PEP-0000](https://peps.python.org/pep-0000/)
 - [MyPy](https://mypy.readthedocs.io/en/stable/running_mypy.html)
 
-## Blogs
+## Blogs/How-Tos
 - [Things I've learned about building CLI tools in Python](https://simonwillison.net/2023/Sep/30/cli-tools-python/)
 - [Specifying entry points into a module](https://python-poetry.org/docs/pyproject/#entry-points)
 - [Don't forget py.typed](https://blog.whtsky.me/tech/2021/dont-forget-py.typed-for-your-typed-python-package/)
 - [Hard type hints for decorators](https://blog.whtsky.me/tech/2021/decorator-type-gymnastics-in-python/)
-- [PyProject.toml](https://realpython.com/python-pyproject-toml/)
+- [PyProject.toml - RealPython.com](https://realpython.com/python-pyproject-toml/)
+- [Packaging Entry Points - Click](https://click.palletsprojects.com/en/stable/entry-points/)
 
 ### Async
 - [Async IO: A Complete Walkthrough](https://realpython.com/async-io-python/)
 - [AsyncIO - Awaitables, Tasks, and Futures](https://bbc.github.io/cloudfit-public-docs/asyncio/asyncio-part-2)
 - [Async Context Managers and Iterators](https://bbc.github.io/cloudfit-public-docs/asyncio/asyncio-part-3.html)
 
-## GitHub Curations
-- [Awesome #Stuff](https://github.com/sindresorhus/awesome)
-
-- [Vinta - Awesome Python](https://github.com/vinta/awesome-python)
-- - [Awesome Python Typing](https://github.com/typeddjango/awesome-python-typing)
-
 ## My "Awesome" Curations
 - [Curio - Async from the ground up](https://github.com/dabeaz/curio)
 - [Threado - Threads and Async, together at last...?](https://github.com/dabeaz/thredo)
 - [Whenever - Datetime for the modern man](https://github.com/ariebovenberg/whenever)
+- [Click - Can't spell CLI without Click](https://click.palletsprojects.com/en/stable/)
+- [Falyx - Click but Edgy and Async](https://pypi.org/project/falyx/)
 
-## To Read Libraries
-A partial list of libraries and repos to look into.
-- [cookiecutter](https://github.com/cookiecutter/cookiecutter)
-- [DearPyGui](https://github.com/hoffstadt/DearPyGui)
-- [PyAutoGUI](https://github.com/asweigart/pyautogui)
-- [nicewin](https://github.com/asweigart/nicewin)
-- [decouple](https://github.com/HBNetwork/python-decouple)
-- [The Algoritms](https://github.com/TheAlgorithms/Python)
-- [PyPattyrn](https://github.com/tylerlaberge/PyPattyrn)
+## Other GitHub Curations
+- [Awesome #Stuff](https://github.com/sindresorhus/awesome)
+- [Vinta - Awesome Python](https://github.com/vinta/awesome-python)
+- - [typeddjango - Awesome Python Typing](https://github.com/typeddjango/awesome-python-typing)

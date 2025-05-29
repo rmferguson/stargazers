@@ -15,9 +15,8 @@ Timer also contains some utility methods for timestamps.
 """
 
 import time
+from contextlib import AbstractContextManager
 from datetime import datetime, timedelta, timezone
-
-from .context import AbstractContextManager
 
 __all__ = [
     "Timer",

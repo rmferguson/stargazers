@@ -22,6 +22,11 @@ That's it.
 """
 
 _sentinel = object()
+"""
+Default object for certain iter fucntions.
+
+Raises exceptions when seen.
+"""
 
 
 def first(iterable, default=_sentinel):
@@ -70,8 +75,7 @@ def last(iterable, default=_sentinel):
 
 # Batched was introduced in Python 3.12,
 # with the strict keyword introduced in 3.13
-# If the 3.12 ver is available it should be preferred
-# Since it's written in C.
+# If the 3.12 ver is available, it should be preferred
 def batched(iterable, n, *, strict=False):
     """
     ```python
@@ -80,7 +84,6 @@ def batched(iterable, n, *, strict=False):
     # [(0, 1), (2, 3), (4, 5), (6, 7), (8,)]
     ```
     """
-    from itertools import islice
 
     if n < 1:
         raise ValueError("n must be at least one")

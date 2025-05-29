@@ -1,6 +1,3 @@
-import os
-from zlib import crc32
-
 __all__ = [
     "UTF_8_ENCODING",
     "OPEN_MODE",
@@ -12,8 +9,6 @@ __all__ = [
     "to_utf8_bytes",
     "read_utf8_data",
     "write_utf8_data",
-    "get_str_hex",
-    "get_path_basename_hex",
 ]
 
 
@@ -31,12 +26,11 @@ EXCLUSIVE_MODE = "x"
 Use like:
 ```python
 with open(file, mode=WRITE_MODE + EXCLUSIVE_MODE) as f:
+    # Do something with a guarenteed new file here.
     ...
+...
 ```
 """
-
-
-_DEFAULT_HASH_MOD = (16**6) - 1
 
 
 def to_utf8_bytes(to_encode: str):
@@ -59,12 +53,4 @@ def write_utf8_data(file_path: str, data: str):
     Writes a string to a file after encoding it to bytes.
     """
     with open(file_path, WRITE_MODE_BINARY) as f:
-        f.write(data.encode(UTF_8_ENCODING))
-
-
-def get_str_hex(str_var: str, mod_: int = _DEFAULT_HASH_MOD) -> str:
-    return f"{hex(crc32(str_var.encode(UTF_8_ENCODING)) % mod_)}"
-
-
-def get_path_basename_hex(file_path: str, mod_: int = _DEFAULT_HASH_MOD) -> str:
-    return get_str_hex(os.path.basename(file_path), mod_)
+        return f.write(data.encode(UTF_8_ENCODING))

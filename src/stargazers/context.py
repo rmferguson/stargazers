@@ -10,7 +10,7 @@ class KeyboardInterruptManager(AbstractContextManager):
     """
     Used in the main thread to receive a KeyboardInterrupt, but do nothing until the context ends.
 
-    Note that if you're using this, you should probably be running the script through Click instead, or this should be in the __main__ handler.
+    Note that if you're using this, you should probably be running the script through `Click` instead, or this should be in the __main__ handler.
 
     Due to how signals in python work, this can only be used in the main thread.
 

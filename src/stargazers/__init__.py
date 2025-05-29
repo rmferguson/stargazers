@@ -16,9 +16,6 @@ import operator
 import threading
 import typing
 
-# I can't shake the feeling I'm gonna want this later
-# https://docs.python.org/3/library/functools.html#functools.singledispatch
-
 __all__ = [
     # Helpers in this file
     "current_thread_is_main",
@@ -31,9 +28,14 @@ def current_thread_is_main():
     """
     Returns if the current thread appears to be the main thread.
 
-    That is, returns if the threading.current_thread()
-    method returns the same object as the threading.main_thread() method,
+    That is, returns if the `threading.current_thread` method
+    returns the same object as the `threading.main_thread` method,
     which is checked by `is` to check for identity.
+
+    Equilvalent to
+    ```
+    return (id(threading.current_thread()) == id(threading.main_thread()))
+    ```
     """
     # return (id(threading.current_thread()) == id(threading.main_thread()))
     return threading.current_thread() is threading.main_thread()
@@ -76,6 +78,21 @@ def invariant(
     test: typing.Callable[..., bool],
     msg: str | None = None,
 ) -> bool:
+    """
+    Declare an invariant in your code.
+
+    Used much like an `assert` statement, but will run even out of `__debug__` contexts.
+
+    ```
+    invariant(True)
+    invariant(False) # raises
+    ```
+
+    If prefaced with `assert`, Python will strip it out of your code out of `__debug__`, which may or may not be what you want.
+
+    If you do preface an `invariant()` call with `assert`, note that the `InvariantViolation` will happen first,
+    and you will not see an `AssertionError`.
+    """
     if not test(obj):
         assert callable(test)
         msg = "" if msg is None else msg[:]

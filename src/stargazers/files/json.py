@@ -18,7 +18,7 @@ __all__ = [
     "squish_json",
 ]
 
-JSON_EXT = "json"  # Prefer this one.
+JSON_EXT = "json"
 DOT_JSON = ".json"
 
 
@@ -39,7 +39,7 @@ def read_utf8_json_data(file_path: str):
 
 def write_utf8_json_data(
     file_path: str,
-    json_data: typing.Any,  # Fuck it, you know what JSON data looks like.
+    json_data: typing.Any,  # I cannot be assed to type this correctly.
     indent: int | None = JSONIndentConsts.LOOSE,
     sort_keys=False,
 ):
@@ -47,7 +47,7 @@ def write_utf8_json_data(
     Writes valid JSON to a file after converting it to a string representation.
     """
     data = dumps(json_data, indent=indent, sort_keys=sort_keys, ensure_ascii=False)
-    write_utf8_data(file_path, data)
+    return write_utf8_data(file_path, data)
 
 
 def squish_json(json_data: dict | list) -> str:
