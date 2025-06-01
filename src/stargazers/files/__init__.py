@@ -1,3 +1,10 @@
+"""
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
+"""
+
 __all__ = [
     "UTF_8_ENCODING",
     "OPEN_MODE",
@@ -15,8 +22,8 @@ __all__ = [
 UTF_8_ENCODING = "utf-8"
 
 OPEN_MODE = "rt"
-OPEN_MODE_BINARY = "rb"
 WRITE_MODE = "wt"
+OPEN_MODE_BINARY = "rb"
 WRITE_MODE_BINARY = "wb"
 READ_MODE, READ_MODE_BINARY = OPEN_MODE, OPEN_MODE_BINARY
 EXCLUSIVE_MODE = "x"
@@ -34,6 +41,9 @@ with open(file, mode=WRITE_MODE + EXCLUSIVE_MODE) as f:
 
 
 def to_utf8_bytes(to_encode: str):
+    """
+    Convenience function to encode a string from UTF-8 to bytes.
+    """
     return bytes(
         to_encode,
         UTF_8_ENCODING,
@@ -42,7 +52,7 @@ def to_utf8_bytes(to_encode: str):
 
 def read_utf8_data(file_path: str):
     """
-    Opens a byte-encoded file, decodes it to UTF-8 and returns the contents as a string.
+    Opens a byte-encoded file and returns the contents as a UTF-8 decoded string.
     """
     with open(file_path, mode=OPEN_MODE_BINARY) as f:
         return f.read().decode(UTF_8_ENCODING)
@@ -50,7 +60,7 @@ def read_utf8_data(file_path: str):
 
 def write_utf8_data(file_path: str, data: str):
     """
-    Writes a string to a file after encoding it to bytes.
+    Encodes a string to bytes and writes them to a file.
     """
     with open(file_path, WRITE_MODE_BINARY) as f:
         return f.write(data.encode(UTF_8_ENCODING))

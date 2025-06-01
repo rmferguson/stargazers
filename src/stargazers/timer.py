@@ -1,17 +1,22 @@
 """
-Contains the `Timer` class, which can be used to time time to roughly 3 decimal digits of precision.
+Contains the `Timer` class, which can be used to measure time to roughly 3 decimal digits of precision.
 ```python
 t = Timer()
 with t:
     time.sleep(1)
 # t.duration available here.
 ```
-Note that this is **not good enough** to do any serious performance testing.
+Note that this is **not good enough** to do any serious performance testing. It *will* give you a good idea of the timing in file manipulation.
 
 Timer also contains some utility methods for timestamps.
 - Timer.utcnow() -> datetime:
 - Timer.get_utc() -> int:
 - Timer.get_utc_string() -> str:
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
 """
 
 import time
@@ -172,8 +177,6 @@ class Timer(AbstractContextManager):
     def lap_times(self):
         for start, end in self.get_laps():
             yield end - start
-
-    # TODO(@Robert): Average lap time
 
     def __enter__(self):
         self.start()

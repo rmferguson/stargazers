@@ -10,7 +10,12 @@ Inspired in part by [a guy on StackOverflow](https://stackoverflow.com/questions
 > # Your script/app needs to call this somewhere at least once.
 > logging.basicConfig()
 
-No. No you don't.
+Turns out, no you don't!
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
 """
 
 import logging
@@ -139,14 +144,3 @@ def get_debug_logger_for(py_file_name):
         date_format=_default_dt_format,
         debug_config=True,
     )
-
-
-if __name__ == "__main__":
-    l = get_logger_for(__name__)
-
-    l.debug("Debug")
-    l.info("Info")
-    l.warning("Warning")
-    l.error("Error")
-    l.critical("Critical")
-    l.info(l.level)

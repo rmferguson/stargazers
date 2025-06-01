@@ -1,3 +1,18 @@
+"""
+A short collection of iterator helpers.
+
+I take no credit for the ones that are explicitly credited to the [itertools recipes](https://docs.python.org/3/library/itertools.html#itertools-recipes).
+At time of writing:
+- batched
+- flatten
+- windowed
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
+"""
+
 import functools
 import typing
 from collections import deque
@@ -23,7 +38,7 @@ That's it.
 
 _sentinel = object()
 """
-Default object for certain iter fucntions.
+Default object for certain iter functions within this module.
 
 Raises exceptions when seen.
 """
@@ -73,11 +88,13 @@ def last(iterable, default=_sentinel):
     return default
 
 
-# Batched was introduced in Python 3.12,
-# with the strict keyword introduced in 3.13
-# If the 3.12 ver is available, it should be preferred
 def batched(iterable, n, *, strict=False):
     """
+    `batched` was introduced in Python 3.12,
+    with the strict keyword introduced in 3.13
+    If the 3.12+ ver is available, you should probably prefer that.
+    That said, this version will work in all versions of python 3 where `itertools.islice` is available.
+
     ```python
     data = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     list(batched(data, 2))
@@ -105,10 +122,10 @@ def flatten(iterable):
 
     Differences from moreitertools.collapse:
 
-    This version *removes*, and *does not* support:
-    - the usage of a deque. The import and usage seemed unnecessary, since the original always pops and appends to the left.
-    - the ability to specifiy types that shouldn't be flattened. The only types that avoid being flattened are `str` and `bytes`, and this is explicitly because those types being flattened is actively harmful in almost all cases.
-    - the notion of flattening to a specific level of flatness. Don't be weird; just flatten all the way down.
+    This version ***removes***, and does ***not*** support:
+    - The usage of a deque. The import and usage seemed unnecessary, since the original recipe always pops and appends to the left side.
+    - The ability to specifiy types that shouldn't be flattened. The only types that avoid being flattened in this one are `str` and `bytes`, and this is explicitly because those types being flattened is actively harmful in almost all cases.
+    - The notion of flattening to a specific level of flatness. I consider this a weird usecase and I don't want to support it. Don't be weird: Just flatten your iterables all the way down.
     """
 
     stack = []

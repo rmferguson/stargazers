@@ -9,6 +9,11 @@ Most of these deserve better homes.
 - [CMDline options](https://docs.python.org/3/using/cmdline.html#environment-variables)
 - [Developer Mode](https://docs.python.org/3/library/devmode.html#devmode)
 - [System Flags (Dev Mode)](https://docs.python.org/3/library/sys.html#sys.flags.dev_mode)
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
 """
 
 import functools
@@ -17,7 +22,6 @@ import threading
 import typing
 
 __all__ = [
-    # Helpers in this file
     "current_thread_is_main",
     "dump_to_dict",
     "invariant",
@@ -92,6 +96,8 @@ def invariant(
 
     If you do preface an `invariant()` call with `assert`, note that the `InvariantViolation` will happen first,
     and you will not see an `AssertionError`.
+
+    Note that typecheckers tend to hate the way that I've defined this. You likely will run into type-checker errors.
     """
     if not test(obj):
         assert callable(test)

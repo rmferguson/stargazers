@@ -1,3 +1,13 @@
+"""
+Short collection of Mixins. These provide some niche functionality, but I also routinely find them useful.
+
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
+"""
+
 import abc
 from json import loads
 from operator import attrgetter

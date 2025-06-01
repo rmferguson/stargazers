@@ -1,3 +1,10 @@
+"""
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
+"""
+
 from time import sleep
 
 import pytest

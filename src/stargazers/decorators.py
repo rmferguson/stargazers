@@ -1,3 +1,12 @@
+"""
+A collection of decorators. Well, just the one right now.
+
+### Legal
+SPDX-FileCopyright © 2025 Robert Ferguson <rmferguson@pm.me>
+
+SPDX-License-Identifier: [MIT](https://spdx.org/licenses/MIT.html)
+"""
+
 import functools
 import random
 import time
