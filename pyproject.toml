@@ -1,5 +1,5 @@
 [project]
-name = "stargazers"
+name = "stargazer-utils"
 version = "1.0.0"
 description = "Tools to help people shoot for the stars"
 authors = [
@@ -8,6 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
+
+[project.urls]
+homepage = "https://github.com/rmferguson/stargazers"
+repository = "https://github.com/rmferguson/stargazers"
 
 [tool.poetry]
 
@@ -33,13 +37,6 @@ atomic = true
 line_length = 100
 skip_gitignore = true
 known_first_party = ["pulsar", "stargazers"]
-
-[tool.refurb]
-ignore = [112]
-enable_all = true
-quiet = true
-format = "text"
-sort_by = "filename"
 
 [tool.pylint.main]
 fail-under = 10
